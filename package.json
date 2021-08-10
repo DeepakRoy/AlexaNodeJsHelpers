@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roys4u/AlexaNodeJsHelpers.git"
+    "url": "git+https://github.com/GeniusLead/AlexaNodeJsHelpers.git"
   },
   "author": "adam kemp",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/roys4u/AlexaNodeJsHelpers/issues"
+    "url": "https://github.com/GeniusLead/AlexaNodeJsHelpers/issues"
   },
-  "homepage": "https://github.com/roys4u/AlexaNodeJsHelpers#readme",
+  "homepage": "https://github.com/GeniusLead/AlexaNodeJsHelpers#readme",
   "dependencies": {},
   "devDependencies": {}
 }
