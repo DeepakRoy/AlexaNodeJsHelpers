@@ -1,33 +1,38 @@
 const Alexa = require('ask-sdk-core');
-const helperMethod = require('../helpers/helper.js');
-const { displayList } = require('../models/displayList.js');
-const { repromptList } = require('../models/repromptList.js');
+const helperMethod = require('../../../../helpers/helper.js');
+const { displayList } = require('../../../../models/displayList.js');
+const { repromptList } = require('../../../../models/repromptList.js');
+
+function search(nameKey, myArray){
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].name === nameKey) {
+            return myArray[i];
+        }
+    }
+}
 
 function canDoAPLFunction(handlerInput, intentName){
 
-    const intentData = helperMethod.search(intentName, displayList);
+    const intentData = search(intentName, displayList);
 
     var responseBuilder = handlerInput.responseBuilder;
  
 
     if(Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL'])
         {
-            var responseBuilder = APLFunction(intentData, responseBuilder, intentName)
+            var responseBuilder = APLFunction(intentData, responseBuilder);
         }
         else
         {
-            var responseBuilder = standardCardFunction(intentData, responseBuilder)
+            var responseBuilder = standardCardFunction(intentData, responseBuilder);
         }
 
     return handlerInput.responseBuilder;
 };
 
-function APLFunction(intentData, responseBuilder,intentName){
+function APLFunction(intentData, responseBuilder){
 
-    if(intentName != 'LAUNCH' && intentName != 'HELP')
-    {
-        APLDataSettings(intentData)
-    }
+        helperMethod.APLDataSettings(intentData);
            
     responseBuilder.addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
@@ -36,13 +41,6 @@ function APLFunction(intentData, responseBuilder,intentName){
     });
 
     return responseBuilder
-};
-
-function APLDataSettings(intentData){
-
-    intentData.datasources.detailImageRightData.image.sources[0].url = `${intentData.URL}`;
-    intentData.datasources.detailImageRightData.textContent.locationText.text = `${intentData.description}`;
-    intentData.datasources.detailImageRightData.textContent.primaryText.text = `${intentData.title}`;
 };
 
 function standardCardFunction(intentData, responseBuilder){
@@ -56,15 +54,15 @@ function standardCardFunction(intentData, responseBuilder){
 };
 
 function speakOutputFunction(intentName){
-    const intentData = helperMethod.search(intentName, displayList);
-    var speakOutput = intentData.speakOutput
+    const intentData = search(intentName, displayList);
+    var speakOutput = helperMethod.voiceWrap(intentData.speakOutput);
     return speakOutput;
 };
 
 function repromptFunction(){
     const repromptExist = repromptList[Math.floor(Math.random() * repromptList.length)];
-    const repromptText = repromptExist.description;
+    const repromptText = helperMethod.voiceWrap(repromptExist.description);
     return repromptText;
 };
 
-module.exports = { canDoAPLFunction, APLFunction, standardCardFunction, speakOutputFunction, repromptFunction};
+module.exports = { canDoAPLFunction, APLFunction, standardCardFunction, speakOutputFunction, repromptFunction, search};
