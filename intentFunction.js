@@ -1,7 +1,7 @@
 const Alexa = require('ask-sdk-core');
-const helperMethod = require('../../../../helpers/helper.js');
-const { displayList } = require('../../../../models/displayList.js');
-const { repromptList } = require('../../../../models/repromptList.js');
+const helperMethod = require('../../../helpers/helper.js');
+const { displayList } = require('../../../models/displayList.js');
+const { repromptList } = require('../../../models/repromptList.js');
 
 function search(nameKey, myArray){
     for (var i=0; i < myArray.length; i++) {
