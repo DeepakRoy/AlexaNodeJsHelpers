@@ -50,7 +50,7 @@ function standardCardFunction(intentData, responseBuilder){
         .getResponse();
 };
 
-function speakOutputFunction(intentName, helperMethod, displayList){
+function speakOutputFunction(intentName, displayList, helperMethod,){
     const intentData = search(intentName, displayList);
     var speakOutput = helperMethod.voiceWrap(intentData.speakOutput);
     return speakOutput;
