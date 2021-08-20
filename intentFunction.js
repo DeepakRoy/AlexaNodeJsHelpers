@@ -8,7 +8,7 @@ function search(nameKey, myArray){
     }
 }
 
-function canDoAPLFunction(handlerInput, intentName, displayList){
+function canDoAPLFunction(handlerInput, intentName, displayList, helperMethod){
 
     const intentData = search(intentName, displayList);
 
@@ -17,7 +17,7 @@ function canDoAPLFunction(handlerInput, intentName, displayList){
 
     if(Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL'])
         {
-            var responseBuilder = APLFunction(intentData, responseBuilder);
+            var responseBuilder = APLFunction(intentData, responseBuilder, helperMethod);
         }
         else
         {
@@ -27,7 +27,7 @@ function canDoAPLFunction(handlerInput, intentName, displayList){
     return handlerInput.responseBuilder;
 };
 
-function APLFunction(intentData, responseBuilder){
+function APLFunction(intentData, responseBuilder, helperMethod){
 
         helperMethod.APLDataSettings(intentData);
            
@@ -50,7 +50,7 @@ function standardCardFunction(intentData, responseBuilder){
         .getResponse();
 };
 
-function speakOutputFunction(intentName, displayList, helperMethod,){
+function speakOutputFunction(intentName, displayList, helperMethod){
     const intentData = search(intentName, displayList);
     var speakOutput = helperMethod.voiceWrap(intentData.speakOutput);
     return speakOutput;
