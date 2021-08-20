@@ -1,6 +1,6 @@
 {
   "name": "@geniusleaduk/alexahelpers",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "functions for creating basic intents",
   "main": "index.js",
   "scripts": {
