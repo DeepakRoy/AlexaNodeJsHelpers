@@ -10,7 +10,7 @@ function search(nameKey, myArray){
 
 function canDoAPLFunction(handlerInput, intentName, displayList, helperMethod){
 
-    const intentData = search(intentName, displayList);
+    const intentData = search(intentName, displayList.displayList);
 
     var responseBuilder = handlerInput.responseBuilder;
  
@@ -51,7 +51,7 @@ function standardCardFunction(intentData, responseBuilder){
 };
 
 function speakOutputFunction(intentName, displayList, helperMethod){
-    const intentData = search(intentName, displayList);
+    const intentData = search(intentName, displayList.displayList);
     var speakOutput = helperMethod.voiceWrap(intentData.speakOutput);
     return speakOutput;
 };
